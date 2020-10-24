@@ -21,6 +21,14 @@ export class AppComponent {
     });
     this.ps.onEvent('Voted').subscribe(() => {
       this.polls = this.ps.getPolls();
+      this.polls.then( (polls: Poll[]) => {
+        for(let poll of polls) {
+          if(poll.id == this.activePoll.id) {
+            this.setActivePoll(poll)
+            break
+          }
+        }
+      })
     });
   }
 
